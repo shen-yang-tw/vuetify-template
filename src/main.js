@@ -4,6 +4,7 @@ import Icons from 'uikit/dist/js/uikit-icons'
 import Vuikit from 'vuikit'
 import VuikitIcons from '@vuikit/icons'
 import '@vuikit/theme'
+
 UIkit.use(Icons)
 Vue.use(Vuikit)
 Vue.use(VuikitIcons)

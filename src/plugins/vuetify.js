@@ -1,4 +1,4 @@
-import '@fortawesome/fontawesome-free/css/all.css'
+// import '@fortawesome/fontawesome-free/css/all.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import colors from 'vuetify/lib/util/colors'
@@ -10,8 +10,6 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon) // Register component globally
 library.add(fas, far, fab) // Include needed icons
-// library.add(far) // Include needed icons
-// library.add(fab) // Include needed icons
 
 Vue.use(Vuetify)
 
@@ -32,6 +30,15 @@ export default new Vuetify({
     }
   },
   icons: {
-    iconfont: 'faSvg' | 'mdiSvg' // 'mdi' || 'mdiSvg', 'mdi' is default - only for display purposes
+    iconfont: 'faSvg', // 'mdi' || 'mdiSvg', 'mdi' is default - only for display purposes
+    values: {
+      // set menu to light (default is solid)
+      hand_paper: {
+        component: FontAwesomeIcon,
+        props: {
+          icon: ['far', 'hand-paper'],
+        },
+      },
+    },
   },
 });

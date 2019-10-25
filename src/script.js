@@ -1,6 +1,0 @@
-import UIkit from 'uikit'
-import Icons from 'uikit/dist/js/uikit-icons'
-import Vuikit from 'vuikit'
-import VuikitIcons from '@vuikit/icons'
-import '@vuikit/theme'
-import './src/scss/main.scss'
