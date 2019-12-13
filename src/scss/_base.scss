@@ -1,3 +1,14 @@
+@import 'functions';
+
+// Globals
+//### Font ###------------------------------------------------//
+$font-cht-hei:'Noto Sans TC', sans-serif !default;
+$font-cht-ming:'Noto Serif TC', serif !default;
+$font-eng:Poppins, sans-serif !default;
+$body-font-family: $font-cht-hei;
+$fontwight:300 !default;
+
+//### Colors & Opacity ###------------------------------------------------//
 @function color-reduce($color) {
 	@if lightness($color) == 0% {
 		@return lighten($color, 10%);
@@ -44,3 +55,15 @@ $color4-darker:color-reduce(darken($color4, 25%)) !default;
 $color4-darkest:color-reduce(darken($color4, 30%)) !default;
 $color4-hover:color-reduce(darken($color4, 10%)) !default;
 $color4-black:change-color($color4, $lightness: 15%) !default;
+
+$color-body-bg:#F7FAFC !default;
+$color-text:#616161 !default;
+//*---------- Brand ------------------------------*//
+$facebook:#4267b2 !default;
+$twitter:#1ea1f2 !default;
+$googleplus:#db4437 !default;
+$linkedin:#007bb4 !default;
+$line:#00b900 !default;
+
+//### Text ###------------------------------------------------//
+$line-height:1.5 !default;

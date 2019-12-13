@@ -18,27 +18,45 @@
 * *	Start Node & Npm: *** ` nvm on ` ***
 
 ##	<Yarn> Install: https://yarnpkg.com/latest.msi
-* *	Test that Yarn is installed by running: *** ` yarn --version ` ***
-	` yarn --version `
+* *	Test Yarn is installed by running: *** ` yarn --version ` ***
+* *	Check Yarn version: `yarn -V` Upgrade Yarn all packages: `yarn upgrade`
+* *	To update new version of Yarn (1): `npm i -g yarn` and restart the VS Code
+* *	To update new version of Yarn (2): `curl --compressed -o- -L https://yarnpkg.com/install.sh | bash` and restart the VS Code
 
 ##	<Vue Cli> Create new project: 
 * *	`https://vuetifyjs.com/zh-Hans/getting-started/quick-start`
-* *	1. Check Vue version: *** `vue -V` or `vue --version` ***
-* *	Install Vue Cli just one time if needed:
-		2. *** `yarn global add @vue/cli @vue/cli-service-global` ***, *** `yarn add @mdi/js @fortawesome/fontawesome-free @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons -D` ***
-		and if needed: (*** `yarn add sass-loader sass -D` *** //`-D` the same as `--dev`)
-* *	Create new Vue project:
-		3. *** `vue create` or `vue create template` *** //`template` means the project name
+* *	Check Vue version: *** `vue -V` or `vue --version` ***
+* *	Install Vue Cli just one time if needed: *** `yarn global add @vue/cli @vue/cli-service-global` ***
+* *	Create new Vue project in target directory:
+	1. *** `vue create template` *** //`template` means the project name
+		Skip prompts and use default preset: *** `vue create -d` *** 
 		App running at:
 	- Local:   ` http://localhost:8080/ `
 	- Network: ` http://192.168.101.67:8080/ `
 * *	Get started with the following commands:
-		4. *** ` cd template ` and ` yarn serve ` ***
+	2. Change to project directory: *** ` cd template ` ***
 * *	Install Vuetify:
-		5. *** `vue add vuetify` ***
-		Once Vuetify has been installed, create a folder within you src directory called [plugins]. Inside, add a [vuetify.js] file. This is where we will handle all of our bootstrapping and setup of Vuetify for your project.
+	3. *** `vue add vuetify lru-cache` ***
+		Once Vuetify has been installed, create a folder within the sub directory named [plugins] of the src directory. Add a [vuetify.js] file in the [plugins] directory. It is where we will handle all of our bootstrapping and setup of Vuetify for your project.
+	4. Install packages: *** `yarn add @mdi/font @mdi/js @fortawesome/fontawesome-free @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons -D` ***
+		and if needed: (*** `yarn add sass-loader sass -D` *** //`-D` the same as `--dev`)
 * *	Note that the development build is not optimized in webpack.
-		6. To create a production build, *** `yarn build` ***
+	5. To develop: ***  ` yarn serve ` ***
+		TO create a production build: *** `yarn build` ***
+		*** `yarn build --no-clean` *** //Disable removing 'dist' directory before building, same as `vue-cli-service build --no-clean`
+		*** `yarn build --modern` *** //This will produce two versions of your app: one modern `smaller` bundle targeting modern browsers that support ES modules, and one legacy bundle targeting older browsers that do not.
+
+##	<Node.js> Eslint: To disable “unexpected console statement” in Node.js
+* *	Open package.json and under section eslintConfig put no-console under rules and restart dev server
+		"eslintConfig": {
+			"rules": {
+				"no-console": "off"
+			},
+		}
+
+
+##	<Vuetify Custom>
+* *	1. Color: `vuetify/src/styles/generic/_colors.scss`
 
 ##	<Yarn> Create new project if needed, or ignore this step
 1.	Starting a new project: *** ` yarn init -y ` ***
