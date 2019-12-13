@@ -20,11 +20,12 @@
         <v-btn icon @click="htmlClass(val.largeFont, val.smallFont)">
           <v-icon>mdi-magnify-plus-outline</v-icon>
         </v-btn>
-        <!-- <v-btn icon @click="minus" :disabled="!val.min ? 'true': undefined"> -->
-        <!-- <v-btn icon @click="minus" :disabled="val.fontSize <= val.min"> -->
+        <!-- <v-btn icon @click="reset"> -->
         <v-btn icon @click="htmlClass('resetFont', val.resetFont)">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
+        <!-- <v-btn icon @click="minus" :disabled="!val.min ? 'true': undefined"> -->
+        <!-- <v-btn icon @click="minus" :disabled="val.fontSize <= val.min"> -->
         <v-btn icon @click="htmlClass(val.smallFont, val.largeFont)">
           <v-icon>mdi-magnify-minus-outline</v-icon>
         </v-btn>
@@ -113,29 +114,29 @@ export default {
     onScroll(e) {
       //e is event
       if (typeof window === "undefined") return;
-      const top = window.pageYOffset || e.target.scrollTop || 0;
-      this.show = top > 20; //The goto button shows when scroll to bottom more than 20px
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.show = top > 20 //The goto button shows when scroll to bottom more than 20px
     },
     toTop() {
-      this.$vuetify.goTo(0);
+      this.$vuetify.goTo(0)
     },
     plus() {
-      //Stop when the value is 0.8
+      //Stop when the value is 5
       if (this.val.fontSize >= this.val.max) return
       this.val.fontSize += .5
     },
     minus() {
-      //Stop when the value is 0.8
+      //Stop when the value is 0.5
       if (this.val.fontSize <= this.val.min) return
       this.val.fontSize -= .5
     },
     htmlClass(addClassName, removeClassName) {
-      const el = document.querySelector("html");
+      const el = document.querySelector("html")
       if (addClassName === "resetFont") {
-        el.classList.remove(...removeClassName);
+        el.classList.remove(...removeClassName)
       } else {
-        el.classList.add(addClassName);
-        el.classList.remove(removeClassName);
+        el.classList.add(addClassName)
+        el.classList.remove(removeClassName)
       }
     },
   },
