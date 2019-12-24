@@ -16,17 +16,19 @@
         <v-btn text>Link One</v-btn>
         <v-btn text>Link Two</v-btn>
         <v-btn text>Link Three</v-btn>
+        <!-- <v-btn icon @click="htmlClass(val.largeFont, val.smallFont)"> -->
         <!-- <v-btn icon @click="plus" :disabled="val.fontSize >= val.max"> -->
-        <v-btn icon @click="htmlClass(val.largeFont, val.smallFont)">
+        <v-btn icon @click="fontPlus" :disabled="val.fontSizePx >= val.maxFont">
           <v-icon>mdi-magnify-plus-outline</v-icon>
         </v-btn>
-        <!-- <v-btn icon @click="reset"> -->
-        <v-btn icon @click="htmlClass('resetFont', val.resetFont)">
+        <!-- <v-btn icon @click="htmlClass('resetFont', val.resetFont)"> -->
+        <v-btn icon @click="reset">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
+        <!-- <v-btn icon @click="htmlClass(val.smallFont, val.largeFont)"> -->
         <!-- <v-btn icon @click="minus" :disabled="!val.min ? 'true': undefined"> -->
         <!-- <v-btn icon @click="minus" :disabled="val.fontSize <= val.min"> -->
-        <v-btn icon @click="htmlClass(val.smallFont, val.largeFont)">
+        <v-btn icon @click="fontMinus" :disabled="val.fontSizePx <= val.minFont">
           <v-icon>mdi-magnify-minus-outline</v-icon>
         </v-btn>
         <v-btn icon>
@@ -45,21 +47,13 @@
         </v-tabs>
       </template>
     </v-app-bar>
-    <!-- <v-sheet id="scrolling-techniques-5" class="overflow-y-auto" max-height="600">
-      <v-container>
-        <v-content v-on:enlarge-text="counter($event)">
-          <v-sheet min-height="1200">
-            <BreadCrumb :breadcrumb="val.items" :divider="val.divider" />
-            {{val.fontSize}}
-          </v-sheet>
-        </v-content>
-      </v-container>
-    </v-sheet>-->
+
+    <CarouselImages :showArrows="val.carouselArrows" :cycle="val.carouselCycle" :items="val.slides" :align="val.carouselAlign" :justify="val.carouselJustify" :color="val.carouselCaptionBg"/>
 
     <v-content>
       <v-sheet min-height="1200">
         <v-container>
-          <BreadCrumb :breadcrumb="val.items" :divider="val.divider" />
+          <BreadCrumb :breadcrumb="val.breadcrumbLinks" :divider="val.breadcrumbDivider" />
           {{val.fontSize.toFixed(1)}}
           {{val.resetFont}}
         </v-container>
@@ -76,21 +70,44 @@
 
 <script>
 // var js = require('script.js')
+import BreadCrumb from '@/components/BreadCrumb.vue'
+import CarouselImages from '@/components/CarouselImages.vue'
+
 export default {
   name: "App",
   components: {
-    BreadCrumb: () => import("@/components/BreadCrumb.vue")
+    // BreadCrumb: () => import("@/components/BreadCrumb.vue")
+    BreadCrumb, CarouselImages
   },
   data: () => ({
     val: {
-      items: [
+      breadcrumbLinks: [
         { disabled: false, href: "breadcrumbs_dashboard", text: "Link1" },
         { disabled: true, href: "breadcrumbs_dashboard", text: "Link2" }
       ],
-      divider: ">",
+      breadcrumbDivider: ">",
+      slides: [
+        {
+          src: 'https://picsum.photos/id/200/1920/600', caption: 'Slide'
+        },
+        {
+          src: 'https://picsum.photos/id/310/1920/600', caption: 'Slide'
+        },
+        {
+          src: 'https://picsum.photos/id/400/1920/600', caption: 'Slide'
+        },
+      ],
+      carouselArrows: true,
+      carouselCycle: true,
+      carouselAlign: "end",
+      carouselJustify: "center",
+      carouselCaptionBg: "rgba(255, 0, 0, 0.5)",
       fontSize: 1,
       min: .5,
       max: 5,
+      fontSizePx: 16,
+      minFont: 12,
+      maxFont: 24,
       resetFont: ['smallFont', 'largeFont'],
       smallFont: 'smallFont',
       largeFont: 'largeFont',
@@ -113,12 +130,24 @@ export default {
   methods: {
     onScroll(e) {
       //e is event
-      if (typeof window === "undefined") return;
+      if (typeof window === "undefined") return
       const top = window.pageYOffset || e.target.scrollTop || 0
       this.show = top > 20 //The goto button shows when scroll to bottom more than 20px
     },
     toTop() {
       this.$vuetify.goTo(0)
+    },
+    fontPlus() {
+      const el = document.querySelector("html")
+      var font = this.val.fontSizePx += 1
+      if (font >= this.val.maxFont) return //stops and returns a value
+      el.style.fontSize = font + "px"
+    },
+    fontMinus() {
+      const el = document.querySelector("html")
+      var font = this.val.fontSizePx -= 1
+      if (font <= this.val.minFont) return
+      el.style.fontSize = font + "px"
     },
     plus() {
       //Stop when the value is 5
@@ -133,20 +162,25 @@ export default {
     htmlClass(addClassName, removeClassName) {
       const el = document.querySelector("html")
       if (addClassName === "resetFont") {
-        el.classList.remove(...removeClassName)
+        el.classList.remove(...removeClassName) //remove multiple classes of array
       } else {
         el.classList.add(addClassName)
         el.classList.remove(removeClassName)
       }
     },
+    reset() {
+      const el = document.querySelector("html")
+      this.val.fontSizePx = 16
+      el.style.fontSize = this.val.fontSizePx + "px"
+    }
   },
   computed: {
-    reset() {
-      return {
-        'dotted': this.panda !== 'Kung Fu',
-        'red-border': this.panda === 'Kung Fu'
-      }
-    }
+    // reset() {
+    //   return {
+    //     'dotted': this.panda !== 'Kung Fu',
+    //     'red-border': this.panda === 'Kung Fu'
+    //   }
+    // }
   },
   created() {
   },
