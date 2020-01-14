@@ -1,3 +1,5 @@
+//all modules import here will <link> css in html
+
 import Vue from 'vue'
 // import UIkit from 'uikit'
 // import Icons from 'uikit/dist/js/uikit-icons'
@@ -11,6 +13,7 @@ Vue.use(VuikitIcons)
 
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
+import '../src/scss/tailwindcss.scss'
 import '../src/scss/main.scss'
 //Import all global js or css files here that will work in all pages
 

@@ -1,42 +1,40 @@
 <template>
-  <v-card class="overflow-hidden">
-    <v-app-bar
-      :absolute="absolute"
-      :app="app"
-      :dark="dark"
-      :scroll-target="scrollTarget"
-      :color="color"
-      :elevate-on-scroll="elevateOnScroll"
-      :hide-on-scroll="hideOnScroll"
-      :fade-on-scroll="fadeOnScroll"
-      :fade-img-on-scroll="fadeImgOnScroll"
-      :inverted-scroll="invertedScroll"
-      :collapse="collapse"
-      :collapse-on-scroll="collapseOnScroll"
-      :shrink-on-scroll="shrinkOnScroll"
-      :extended="extended"
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+  <v-app-bar
+    :absolute="absolute"
+    :fixed="fixed"
+    :dense="dense"
+    :app="app"
+    :src="src"
+    :dark="dark"
+    :elevation="elevation"
+    :scroll-threshold="scrollThreshold"
+    :scroll-target="scrollTarget"
+    :color="color"
+    :colors="colors"
+    :elevate-on-scroll="elevateOnScroll"
+    :hide-on-scroll="hideOnScroll"
+    :fade-on-scroll="fadeOnScroll"
+    :fade-img-on-scroll="fadeImgOnScroll"
+    :inverted-scroll="invertedScroll"
+    :collapse="collapse"
+    :collapse-on-scroll="collapseOnScroll"
+    :shrink-on-scroll="shrinkOnScroll"
+    :extended="extended"
+  >
+    <template v-slot:img="{ props }">
+      <v-img v-bind="props" :gradient="gradient" :opacity="opacity"></v-img>
+    </template>
 
-      <v-toolbar-title>Title</v-toolbar-title>
+    <v-app-bar-nav-icon class="hidden-md-and-up"></v-app-bar-nav-icon>
 
-      <v-spacer></v-spacer>
+    <v-toolbar-title>Title</v-toolbar-title>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-sheet id="playground-example" class="overflow-y-auto" max-height="600">
-      <!-- <v-container style="height: 1500px;"></v-container> -->
-      <v-container fill-height>
-        <v-layout>
-            <v-flex>
-              <h1 v-for="n in 20" :key="n">{{n}}</h1>
-            </v-flex>
-        </v-layout>
-      </v-container>
-    </v-sheet>
-  </v-card>
+    <v-spacer></v-spacer>
+
+    <v-btn icon>
+      <v-icon>mdi-magnify</v-icon>
+    </v-btn>
+  </v-app-bar>
 </template>
 
 <script>
@@ -44,10 +42,11 @@ export default {
   name: "AppBars",
   props: {
     absolute: Boolean,
+    fixed: Boolean,
+    dense: Boolean,
     app: Boolean,
     dark: Boolean,
     scrollTarget: Boolean,
-    color: String,
     elevateOnScroll: Boolean,
     hideOnScroll: Boolean,
     fadeOnScroll: Boolean,
@@ -56,21 +55,29 @@ export default {
     collapse: Boolean,
     collapseOnScroll: Boolean,
     shrinkOnScroll: Boolean,
-    extended: Boolean
+    extended: Boolean,
+    src: String,
+    scrollThreshold: String,
+    gradient: String,
+    opacity: String,
+    elevation: String,
+    color: String,
+    colors: Array
   },
-  data: () => ({
-    elevateOnScroll: false,
-    hideOnScroll: false,
-    fadeOnScroll: false,
-    fadeImgOnScroll: false,
-    invertedScroll: false,
-    collapse: false,
-    collapseOnScroll: false,
-    shrinkOnScroll: false,
-    extended: false,
-    color: "accent",
-    colors: ["primary", "accent", "warning lighten-2", "teal", "orange"]
-  })
+  // data: () => ({
+  //   elevateOnScroll: false,
+  //   hideOnScroll: false,
+  //   fadeOnScroll: false,
+  //   fadeImgOnScroll: false,
+  //   invertedScroll: false,
+  //   collapse: false,
+  //   collapseOnScroll: false,
+  //   shrinkOnScroll: false,
+  //   extended: false,
+  //   gradient: "to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)",
+  //   color: "accent",
+  //   colors: ["primary", "accent", "warning lighten-2", "teal", "orange"]
+  // })
 };
 </script>
 

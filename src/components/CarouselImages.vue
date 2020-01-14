@@ -8,7 +8,8 @@
       <v-carousel-item v-for="(item,i) in items" :items="items" :key="i" :src="item.src" :caption="item.caption">
         <v-sheet color="transparent" height="100%" tile>
           <v-row class="fill-height" :align="align" :justify="justify">
-            <v-sheet :color="color" tile>
+            <v-sheet :color="color" tile :class="customClass">
+              <!-- :class="class" will get error -->
               <div class="display-3">{{ item.caption }}{{ i + 1 }}</div>
             </v-sheet>
           </v-row>
@@ -29,6 +30,7 @@ export default {
     color: String,
     align: String,
     justify: String,
+    customClass: String,
   },
   // data() {
   //   return {

@@ -5,6 +5,7 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
+
   // configureWebpack: {
   //   output: {
   //     libraryExport: 'default' //Guide: https://cli.vuejs.org/guide/build-targets.html#vue-vs-js-ts-entry-files

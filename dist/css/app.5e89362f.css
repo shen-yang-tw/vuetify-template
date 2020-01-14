@@ -1,0 +1,2 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900|Noto+Serif+TC|Poppins&display=swap&subset=chinese-traditional);@tailwind base;@tailwind components;@tailwind utilities
+body{background-color:#f7fafc}body *{font-family:Noto Sans TC,sans-serif}a:not([class*=btn]):hover{text-decoration:underline}html.largeFont{font-size:20px}html.smallFont{font-size:14px}html.resetFont{font-size:16px}

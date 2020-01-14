@@ -30,6 +30,9 @@ html.resetFont {font-size: $font-size-root;}
 /* Landscape */
 @media screen and (orientation:landscape) {
 }
+/*---------- Only landscape in mobile ------------------------------*/
+@media screen and (orientation:landscape) and (max-device-width: 959px) {
+}
 
 /* ----------- IE10+ ----------- */
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {

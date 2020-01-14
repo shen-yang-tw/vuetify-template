@@ -38,8 +38,8 @@
 * *	Install Vuetify:
 	3. *** `vue add vuetify lru-cache` ***
 		Once Vuetify has been installed, create a folder within the sub directory named [plugins] of the src directory. Add a [vuetify.js] file in the [plugins] directory. It is where we will handle all of our bootstrapping and setup of Vuetify for your project.
-	4. Install packages: *** `yarn add @mdi/font @mdi/js @fortawesome/fontawesome-free @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons -D` ***
-		and if needed: (*** `yarn add sass-loader sass -D` *** //`-D` the same as `--dev`)
+	4. Install packages: *** `yarn add tailwindcss` *** & *** `yarn add @mdi/font @mdi/js @fortawesome/fontawesome-free @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons -D` ***
+		and if needed: (*** `yarn add sass-loader sass @fullhuman/postcss-purgecss -D` *** //`-D` the same as `--dev`)
 * *	Note that the development build is not optimized in webpack.
 	5. To develop: ***  ` yarn serve ` ***
 		TO create a production build: *** `yarn build` ***
