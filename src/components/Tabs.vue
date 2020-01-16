@@ -17,7 +17,7 @@
     <v-tabs-slider></v-tabs-slider>
 
     <!-- If only "tab" is used, the "id" value must be set in the "tab" of data value -->
-    <!-- :tabs="tabs" cannot be set on any <tag> or it will show errors on <v-tabs> -->
+    <!-- :tabs="tabs" cannot be set on any <tag> or it will show errors on <v-tabs>, but it needs to set the props type -->
     <!-- <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + tab.href"> -->
     <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + (!tab.href ? tab.href : '-' + tab.href)">
       {{ tab.name }}
