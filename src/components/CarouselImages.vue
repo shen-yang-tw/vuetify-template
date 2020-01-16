@@ -5,7 +5,7 @@
       :hide-delimiters="hideDelimiters"
       :cycle="cycle"
     >
-      <v-carousel-item v-for="(item,i) in items" :items="items" :key="i" :src="item.src" :caption="item.caption">
+      <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src" :caption="item.caption">
         <v-sheet color="transparent" height="100%" tile>
           <v-row class="fill-height" :align="align" :justify="justify">
             <v-sheet :color="color" tile :class="customClass">

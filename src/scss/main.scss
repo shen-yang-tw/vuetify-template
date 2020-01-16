@@ -1,9 +1,21 @@
-@import 'functions', 'base', 'mixin';
+@import '~vuetify/src/styles/styles.sass';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import 'functions', 'mixin';
 
 @include google-font("Noto+Sans+TC:100,300,400,500,700,900|Noto+Serif+TC|Poppins");
 
+//### Font ###------------------------------------------------//
+$font-cht-hei:'Noto Sans TC', sans-serif !default;
+$font-cht-ming:'Noto Serif TC', serif !default;
+$font-eng:Poppins, sans-serif !default;
+$body-font-family: $font-cht-hei;
+$fontwight:300 !default;
+
 body {
-  background-color:$color-body-bg;
+  background-color:#F7FAFC;
   // font-weight:$fontwight;
   * {
     font-family:$font-cht-hei;
@@ -16,12 +28,21 @@ a:not([class*=btn]):hover {
 	text-decoration: underline;
   // &>* {text-decoration: none;}
 }
+[class*="v-tab"]:hover {
+	text-decoration: none !important;
+}
 html.largeFont {font-size: 20px;}
 html.smallFont {font-size: 14px;}
 html.resetFont {font-size: $font-size-root;}
 
-.bg_primary {
-
+//Vuetify - needs: @import '~vuetify/src/styles/styles.sass';
+.custom-class {
+  border-radius: $border-radius-root;
+}
+@media #{map-get($display-breakpoints, 'md-and-down')}{
+  .custom-class {
+    display: none
+  }
 }
 
 /* Portrait */

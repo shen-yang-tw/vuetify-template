@@ -1,3 +1,5 @@
+//Variables in Vuetify
+
 // Globals
 // $body-font-family: 'Work Sans', serif;
 // $border-radius-root: 4px; //4px !default;
@@ -27,3 +29,9 @@
 //     'line-height': 1.5em
 //   )
 // );
+
+// @media #{map-get($display-breakpoints, 'md-and-down')}{
+//   .custom-class {
+//     display: none
+//   }
+// }

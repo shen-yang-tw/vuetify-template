@@ -48,14 +48,14 @@
         <!-- <v-tabs centered background-color="transparent">
           <v-tab v-for="n in 8" :key="n">Tab {{n}}</v-tab>
         </v-tabs> -->
-        <Tabs :tabs="tabs" :icons="tabs.icons" :centered="tabs.centered" :bgColor="tabs.bgColor" :contents="tabs.contents" />
+        <Tabs :tabs="tabs.tab" :icons="tabs.icons" :centered="tabs.centered" :bgColor="tabs.bgColor" />
       </template>
     </v-app-bar>
 
     <v-content>
       <v-sheet min-height="1200">
         <CarouselImages :showArrows="carousel.arrows" :hideDelimiters="carousel.hideDelimiters" :cycle="carousel.cycle" :items="carousel.slides" :align="carousel.captionAlign" :justify="carousel.captionJustify" :color="carousel.captionBg" :customClass="carousel.captionSheetClass" />
-        <Tabs :tabs="tabs" :icons="tabs.icons" :centered="tabs.centered" :bgColor="tabs.bgColor" :contents="tabs.contents" />
+        <Tabs :tabs="tabs.tab" :icons="tabs.icons" :grow="tabs.grow" :centered="tabs.centered" :bgColor="tabs.bgColor" :contents="tabs.contents" />
         <v-container fluid>
           <BreadCrumb :breadcrumb="breadcrumb.links" :divider="breadcrumb.divider" />
           {{font.fontSize.toFixed(1)}}
@@ -146,20 +146,21 @@ export default {
       show: false
     },
     tabs: {
+      vmodel: "",
       centered: true,
       bgColor: "transparent",
-      contents: false,
+      contents: true,
+      grow: true,
       icons: false,
-      number: 3,
       tab: [
         {
           icon: "", name: "Tab1", href:"" ,text: "小代供家岸就要，國處際，觀變在令盡山發因了時老，簡有現表：學人發護中地手細力年。對是以影顯內在還請等家我舉空子麼天特？認有們。裡領吸天表時意不那出所條爸生也。"
         },
         {
-          icon: "", name: "Tab2", href:"" ,text: "去我走做動過性好身一文：書先寶。成利當說錯壓孩間一連他把。"
+          icon: "", name: "Tab2", href:"b" ,text: "去我走做動過性好身一文：書先寶。成利當說錯壓孩間一連他把。"
         },
         {
-          icon: "", name: "Tab3", href:"" ,text: "處生面我定舉人字以，了小便得類眼林發麼西類素那通到，自種到！論著行前經氣金上演這、山合來大市天足。"
+          icon: "", name: "Tab3", href:"c" ,text: "處生面我定舉人字以，了小便得類眼林發麼西類素那通到，自種到！論著行前經氣金上演這、山合來大市天足。"
         },
       ],
     }

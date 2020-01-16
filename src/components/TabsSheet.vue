@@ -1,8 +1,9 @@
 
 
 <template>
-  <v-tabs
-    :v-model="vmodel"
+  <v-sheet>
+    <v-tabs
+    v-model="tab"
     :background-color="bgColor"
     :dark="dark"
     :centered="centered"
@@ -12,14 +13,13 @@
     :prev-icon="prevIcon ? 'mdi-arrow-left-bold-box-outline' : undefined"
     :next-icon="nextIcon ? 'mdi-arrow-right-bold-box-outline' : undefined"
     :icons-and-text="icons"
+    :tabs="tabs"
     :contents="contents"
-  >
-    <v-tabs-slider></v-tabs-slider>
+    >
+      <v-tabs-slider></v-tabs-slider>
 
-    <!-- If only "tab" is used, the "id" value must be set in the "tab" of data value -->
-    <!-- :tabs="tabs" cannot be set on any <tag> or it will show errors on <v-tabs> -->
-    <!-- <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + tab.href"> -->
-    <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + (!tab.href ? tab.href : '-' + tab.href)">
+    <!-- <v-tab v-for="(tab,i) in tabs" :key="i" :href="!'tab.href' ? '#tab-${i}' : 'tab.href'"> -->
+    <v-tab v-for="tab in tabs" :key="tab" :icon="tab.icon" :name="tab.name" :href="'#tab-' + tab.name" :text="tab.text">
       {{ tab.name }}
       <v-icon v-if="icons">
         {{ tab.icon }}
@@ -43,23 +43,25 @@
       <v-list class="grey lighten-3">
         <v-list-item v-for="item in more" :key="item" @click="addItem(item)">{{ item }}</v-list-item>
       </v-list>
-    </v-menu>-->
+    </v-menu> -->
 
-    <!-- <v-tab-item v-for="(tab,i) in tabs" :key="i" :value="'tab' + i + tab.href" :text="tab.text"> -->
-    <v-tab-item v-for="(tab,i) in tabs" :key="i" :value="'tab' + i + (!tab.href ? tab.href : '-' + tab.href)" :text="tab.text">
-      <v-card v-if="contents" flat tile>
-        <v-card-text>{{ tab.text }}</v-card-text>
-      </v-card>
-    </v-tab-item>
+    </v-tabs>
 
-  </v-tabs>
+    <v-tabs-items v-model="tab" v-if="contents">
+      <!-- <v-tab-item v-for="i in tabs" :key="i" v-show="!tab.href | !tab.text" :value="`tab-${i}`"> -->
+      <v-tab-item v-for="tab in tabs" :key="tab" :value="'tab-' + tab.name">
+        <v-card flat tile>
+          <v-card-text>{{ tab.text }}</v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-sheet>
 </template>
 
 <script>
 export default {
   name: "Tabs",
   props: {
-    vmodel: String,
     icons: Boolean,
     centered: Boolean,
     grow: Boolean,
@@ -71,7 +73,10 @@ export default {
     bgColor: String,
     dark: String,
     tabs: Array,
+    // tabNumber: Number,
+    // hrefNumber: Number,
     contents: Boolean
+    // href: Boolean,
   }
   // data() {
   //   return {
