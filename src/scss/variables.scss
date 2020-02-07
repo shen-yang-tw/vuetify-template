@@ -1,9 +1,11 @@
+@import 'functions', 'mixin';
+
 //Variables in Vuetify
 
 // Globals
 // $body-font-family: 'Work Sans', serif;
 // $border-radius-root: 4px; //4px !default;
-// $font-size-root: 16px; //16px !default;
+$font-size-root: 18px; //16px !default;
 
 // Variables must come before the import
 // $btn-letter-spacing: 0;
@@ -19,16 +21,16 @@
 //   'large': 54
 // );
 
-// $headings: (
-//   'h1': (
-//     'size': 3.3125rem,
-//     'line-height': 1.15em
-//   ),
-//   'h2': (
-//     'size': 2.25rem,
-//     'line-height': 1.5em
-//   )
-// );
+$headings: (
+  'h1': (
+    'size': calc(60rem/strip-unit($font-size-root)),
+    'line-height': 1.15em
+  ),
+  'h2': (
+    'size': calc(52rem/$font-size-root),
+    'line-height': 1.5em
+  )
+);
 
 // @media #{map-get($display-breakpoints, 'md-and-down')}{
 //   .custom-class {

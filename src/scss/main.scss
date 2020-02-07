@@ -1,7 +1,7 @@
 @import '~vuetify/src/styles/styles.sass';
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+// @import "tailwindcss/base";
+// @import "tailwindcss/components";
+// @import "tailwindcss/utilities";
 
 @import 'functions', 'mixin';
 
@@ -35,7 +35,14 @@ html.largeFont {font-size: 20px;}
 html.smallFont {font-size: 14px;}
 html.resetFont {font-size: $font-size-root;}
 
-//Vuetify - needs: @import '~vuetify/src/styles/styles.sass';
+//### Vuetify - needs: @import '~vuetify/src/styles/styles.sass'; -------------------------------------------------//
+//Tabs
+$tab-disabled-opacity:1 !default;
+$tabs-item-hover-opacity:0.5 !default;
+.theme--dark.v-tabs .v-tab:hover::before {
+  opacity: 0.3;
+}
+
 .custom-class {
   border-radius: $border-radius-root;
 }

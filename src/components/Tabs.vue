@@ -1,8 +1,7 @@
-
-
 <template>
+  <!-- v-model cannot be binded as attribute as ":v-model" or it will be not working -->
   <v-tabs
-    :v-model="vmodel"
+    v-model="model"
     :background-color="bgColor"
     :dark="dark"
     :centered="centered"
@@ -18,18 +17,19 @@
 
     <!-- If only "tab" is used, the "id" value must be set in the "tab" of data value -->
     <!-- :tabs="tabs" cannot be set on any <tag> or it will show errors on <v-tabs>, but it needs to set the props type -->
-    <!-- <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + tab.href"> -->
-    <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + (!tab.href ? tab.href : '-' + tab.href)">
+    <!-- <v-tab v-for="(tab,i) in tabs" :key="i" :icon="tab.icon" :name="tab.name" :href="'#tab' + i + (!tab.href ? tab.href : '-' + tab.href)"> -->
+    <v-tab
+      v-for="(tab, i) in tabs"
+      :key="i"
+      :href="tab.disabled ? tab.href : '#tab-' + i"
+      :target="tab.target"
+    >
       {{ tab.name }}
       <v-icon v-if="icons">
         {{ tab.icon }}
         <!-- mdi-phone -->
       </v-icon>
-      <!-- <v-sheet hidden></v-sheet> -->
     </v-tab>
-
-    <!-- For single link tab or another group link tabs -->
-    <!-- <v-tab text tile link href="#">Normal</v-tab> -->
 
     <!-- v-if="more.length": If Array.length is not empty (ES5+) -->
     <!-- <v-menu v-if="more.length" bottom left>
@@ -45,21 +45,30 @@
       </v-list>
     </v-menu>-->
 
-    <!-- <v-tab-item v-for="(tab,i) in tabs" :key="i" :value="'tab' + i + tab.href" :text="tab.text"> -->
-    <v-tab-item v-for="(tab,i) in tabs" :key="i" :value="'tab' + i + (!tab.href ? tab.href : '-' + tab.href)" :text="tab.text">
-      <v-card v-if="contents" flat tile>
-        <v-card-text>{{ tab.text }}</v-card-text>
-      </v-card>
-    </v-tab-item>
-
+    <v-tabs-items v-model="model">
+      <v-tab-item
+        v-for="(tab, i) in tabs"
+        :key="i"
+        :value="tab.disabled ? '' : 'tab-' + i"
+        :transition="transition"
+        :reverse-transition="reverseTransition"
+      >
+        <v-card v-if="contents" flat tile>
+          <v-card-text>
+            <h2>{{ tab.name }}</h2>
+            {{ tab.text }}
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
   </v-tabs>
 </template>
 
 <script>
 export default {
-  name: "Tabs",
+  name: 'Tabs',
   props: {
-    vmodel: String,
+    model: String,
     icons: Boolean,
     centered: Boolean,
     grow: Boolean,
@@ -71,24 +80,11 @@ export default {
     bgColor: String,
     dark: String,
     tabs: Array,
-    contents: Boolean
+    contents: Boolean,
+    transition: Boolean,
+    reverseTransition: Boolean
   }
-  // data() {
-  //   return {
-  //     tab: null,
-  //     text:
-  //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-  //     icons: false,
-  //     centered: false,
-  //     grow: false,
-  //     vertical: false,
-  //     prevIcon: false,
-  //     nextIcon: false,
-  //     right: false,
-  //     tabs: 3
-  //   };
-  // }
-};
+}
 </script>
 
 <style lang="scss">

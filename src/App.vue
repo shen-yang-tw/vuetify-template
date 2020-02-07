@@ -7,9 +7,22 @@
       Left Side Menu
     </v-navigation-drawer> -->
 
-    <v-app-bar app color="#43a047" dark src="https://picsum.photos/1920/1080?random" fade-img-on-scroll scroll-threshold="500" fixed dense>
+    <v-app-bar
+      app
+      color="#43a047"
+      dark
+      src="https://picsum.photos/1920/1080?random"
+      fade-img-on-scroll
+      scroll-threshold="500"
+      fixed
+      dense
+    >
       <template v-slot:img="{ props }">
-        <v-img v-bind="props" gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)" opacity=".5"></v-img>
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
+          opacity=".5"
+        ></v-img>
       </template>
 
       <v-app-bar-nav-icon class="hidden-md-and-up"></v-app-bar-nav-icon>
@@ -23,7 +36,11 @@
         <v-btn text>Link Three</v-btn>
         <!-- <v-btn icon @click="htmlClass(font.largeFont, font.smallFont)"> -->
         <!-- <v-btn icon @click="plus" :disabled="font.fontSize >= font.max"> -->
-        <v-btn icon @click="fontPlus" :disabled="font.fontSizePx >= font.maxFont">
+        <v-btn
+          icon
+          @click="fontPlus"
+          :disabled="font.fontSizePx >= font.maxFont"
+        >
           <v-icon>mdi-magnify-plus-outline</v-icon>
         </v-btn>
         <!-- <v-btn icon @click="htmlClass('resetFont', font.resetFont)"> -->
@@ -33,7 +50,11 @@
         <!-- <v-btn icon @click="htmlClass(font.smallFont, font.largeFont)"> -->
         <!-- <v-btn icon @click="minus" :disabled="!font.min ? 'true': undefined"> -->
         <!-- <v-btn icon @click="minus" :disabled="font.fontSize <= font.min"> -->
-        <v-btn icon @click="fontMinus" :disabled="font.fontSizePx <= font.minFont">
+        <v-btn
+          icon
+          @click="fontMinus"
+          :disabled="font.fontSizePx <= font.minFont"
+        >
           <v-icon>mdi-magnify-minus-outline</v-icon>
         </v-btn>
         <v-btn icon>
@@ -48,18 +69,50 @@
         <!-- <v-tabs centered background-color="transparent">
           <v-tab v-for="n in 8" :key="n">Tab {{n}}</v-tab>
         </v-tabs> -->
-        <Tabs :tabs="tabs.tab" :icons="tabs.icons" :centered="tabs.centered" :bgColor="tabs.bgColor" />
+        <Tabs
+          :model="tabs.model"
+          :tabs="tabs.tabOnly"
+          :icons="tabs.icons"
+          :centered="tabs.centered"
+          :bgColor="tabs.bgColor"
+          :contents="tabs.noContents"
+        />
       </template>
     </v-app-bar>
 
     <v-content>
       <v-sheet min-height="1200">
-        <CarouselImages :showArrows="carousel.arrows" :hideDelimiters="carousel.hideDelimiters" :cycle="carousel.cycle" :items="carousel.slides" :align="carousel.captionAlign" :justify="carousel.captionJustify" :color="carousel.captionBg" :customClass="carousel.captionSheetClass" />
-        <Tabs :tabs="tabs.tab" :icons="tabs.icons" :grow="tabs.grow" :centered="tabs.centered" :bgColor="tabs.bgColor" :contents="tabs.contents" />
+        <CarouselImages
+          :showArrows="carousel.arrows"
+          :showArrowsOnHover="carousel.arrowsOnHover"
+          :hideDelimiters="carousel.hideDelimiters"
+          :cycle="carousel.cycle"
+          :items="carousel.slides"
+          :align="carousel.captionAlign"
+          :justify="carousel.captionJustify"
+          :color="carousel.captionBg"
+          :rowClass="carousel.rowClass"
+          :customClass="carousel.captionSheetClass"
+          :captionClass="carousel.captionClass"
+        />
+        <Tabs
+          :model="tabs.model"
+          :tabs="tabs.tab"
+          :icons="tabs.icons"
+          :grow="tabs.grow"
+          :centered="tabs.centered"
+          :bgColor="tabs.bgColor"
+          :contents="tabs.contents"
+          :transition="tabs.transition"
+          :reverseTransition="tabs.reverseTransition"
+        />
         <v-container fluid>
-          <BreadCrumb :breadcrumb="breadcrumb.links" :divider="breadcrumb.divider" />
-          {{font.fontSize.toFixed(1)}}
-          {{font.resetFont}}
+          <BreadCrumb
+            :breadcrumb="breadcrumb.links"
+            :divider="breadcrumb.divider"
+          />
+          {{ font.fontSize.toFixed(1) }}
+          {{ htmlFont() }}
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
@@ -70,7 +123,16 @@
       <!-- -->
     </v-footer>
 
-    <v-btn v-scroll="onScroll" v-show="btnToTop.show" fab fixed bottom right color="primary" @click="toTop">
+    <v-btn
+      v-scroll="onScroll"
+      v-show="btnToTop.show"
+      fab
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="toTop"
+    >
       <!-- <v-icon>fas fa-angle-up</v-icon> -->
       <font-awesome-icon :icon="['fas', 'angle-up']" size="lg" />
       <!-- <v-icon class="black--text">mdi-chevron-up</v-icon> -->
@@ -85,49 +147,58 @@ import CarouselImages from '@/components/CarouselImages.vue'
 import Tabs from '@/components/Tabs.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     // BreadCrumb: () => import("@/components/BreadCrumb.vue")
-    BreadCrumb, CarouselImages, Tabs
+    BreadCrumb,
+    CarouselImages,
+    Tabs
   },
   data: () => ({
     breadcrumb: {
       links: [
-        { disabled: false, href: "breadcrumbs_dashboard", text: "Link1" },
-        { disabled: true, href: "breadcrumbs_dashboard", text: "Link2" }
+        { disabled: false, href: 'breadcrumbs_dashboard', text: 'Link1' },
+        { disabled: true, href: 'breadcrumbs_dashboard', text: 'Link2' }
       ],
-      divider: ">",
+      divider: '>'
     },
     carousel: {
       arrows: true,
+      arrowsOnHover: true,
       hideDelimiters: false,
-      cycle: true,
+      cycle: false, //Auto play
       slides: [
         {
-          src: 'https://picsum.photos/id/200/1920/600', caption: 'Slide'
+          src: 'https://picsum.photos/id/200/1920/600',
+          caption: 'Slide1'
         },
         {
-          src: 'https://picsum.photos/id/310/1920/600', caption: 'Slide'
+          src: 'https://picsum.photos/id/310/1920/600',
+          caption: 'Slide2'
         },
         {
-          src: 'https://picsum.photos/id/400/1920/600', caption: 'Slide'
-        },
+          src: 'https://picsum.photos/id/400/1920/600',
+          caption: 'Slide3'
+        }
       ],
-      captionAlign: "end",
-      captionJustify: "center",
-      captionBg: "rgba(255, 0, 0, 0.5)",
-      captionSheetClass: "mb-12 px-4",
+      rowClass: 'fill-height pa-3',
+      captionAlign: 'end',
+      captionJustify: 'end',
+      captionBg: 'rgba(255, 0, 0, 0.5)',
+      captionSheetClass: 'mb-12 mr-2 px-4',
+      captionClass: 'ma-0 max-w-xl'
     },
     font: {
       fontSize: 1,
-      min: .5,
+      min: 0.5,
       max: 5,
-      fontSizePx: 16,
+      defaultSize: 18,
+      fontSizePx: 18,
       minFont: 12,
       maxFont: 24,
       resetFont: ['smallFont', 'largeFont'],
       smallFont: 'smallFont',
-      largeFont: 'largeFont',
+      largeFont: 'largeFont'
     },
     appBar: {
       elevateOnScroll: false,
@@ -139,36 +210,78 @@ export default {
       collapseOnScroll: false,
       shrinkOnScroll: false,
       extended: false,
-      color: "accent",
-      colors: ["primary", "accent", "warning lighten-2", "teal", "orange"]
+      color: 'accent',
+      colors: ['primary', 'accent', 'warning lighten-2', 'teal', 'orange']
     },
     btnToTop: {
       show: false
     },
     tabs: {
-      vmodel: "",
+      model: null, //It must be null or not working
       centered: true,
-      bgColor: "transparent",
+      bgColor: 'transparent',
       contents: true,
+      noContents: false,
       grow: true,
       icons: false,
+      transition: false,
+      reverseTransition: false,
       tab: [
         {
-          icon: "", name: "Tab1", href:"" ,text: "小代供家岸就要，國處際，觀變在令盡山發因了時老，簡有現表：學人發護中地手細力年。對是以影顯內在還請等家我舉空子麼天特？認有們。裡領吸天表時意不那出所條爸生也。"
+          icon: '',
+          name: '隊法紅醫小提',
+          href: '',
+          disabled: false,
+          text:
+            '小代供家岸就要，國處際，觀變在令盡山發因了時老，簡有現表：學人發護中地手細力年。對是以影顯內在還請等家我舉空子麼天特？認有們。裡領吸天表時意不那出所條爸生也。'
         },
         {
-          icon: "", name: "Tab2", href:"b" ,text: "去我走做動過性好身一文：書先寶。成利當說錯壓孩間一連他把。"
+          icon: '',
+          name: '久養當特出車',
+          href: '',
+          disabled: false,
+          text: '去我走做動過性好身一文：書先寶。成利當說錯壓孩間一連他把。'
         },
         {
-          icon: "", name: "Tab3", href:"c" ,text: "處生面我定舉人字以，了小便得類眼林發麼西類素那通到，自種到！論著行前經氣金上演這、山合來大市天足。"
-        },
+          icon: '',
+          name: '他縣是力路也能幾取行',
+          href: 'https://www.google.com/',
+          disabled: true,
+          target: '_blank',
+          text: ''
+        }
       ],
+      tabOnly: [
+        {
+          icon: '',
+          name: 'Tab1',
+          href: '',
+          disabled: true,
+          text:
+            '小代供家岸就要，國處際，觀變在令盡山發因了時老，簡有現表：學人發護中地手細力年。對是以影顯內在還請等家我舉空子麼天特？認有們。裡領吸天表時意不那出所條爸生也。'
+        },
+        {
+          icon: '',
+          name: 'Tab2',
+          href: '',
+          disabled: true,
+          text: '去我走做動過性好身一文：書先寶。成利當說錯壓孩間一連他把。'
+        },
+        {
+          icon: '',
+          name: 'Tab3',
+          href: 'https://www.google.com/',
+          disabled: true,
+          target: '_blank',
+          text: ''
+        }
+      ]
     }
   }),
   methods: {
     onScroll(e) {
       //e is event
-      if (typeof window === "undefined") return
+      if (typeof window === 'undefined') return
       const top = window.pageYOffset || e.target.scrollTop || 0
       this.btnToTop.show = top > 20 //The goto button shows when scroll to bottom more than 20px
     },
@@ -176,30 +289,30 @@ export default {
       this.$vuetify.goTo(0)
     },
     fontPlus() {
-      const el = document.querySelector("html")
-      var font = this.font.fontSizePx += 1
+      const el = document.querySelector('html')
+      const font = (this.font.fontSizePx += 1)
+      el.style.fontSize = font + 'px'
       if (font >= this.font.maxFont) return //stops and returns a value
-      el.style.fontSize = font + "px"
     },
     fontMinus() {
-      const el = document.querySelector("html")
-      var font = this.font.fontSizePx -= 1
+      const el = document.querySelector('html')
+      const font = (this.font.fontSizePx -= 1)
+      el.style.fontSize = font + 'px'
       if (font <= this.font.minFont) return
-      el.style.fontSize = font + "px"
     },
     plus() {
       //Stop when the value is 5
       if (this.font.fontSize >= this.font.max) return
-      this.font.fontSize += .5
+      this.font.fontSize += 0.5
     },
     minus() {
       //Stop when the value is 0.5
       if (this.font.fontSize <= this.font.min) return
-      this.font.fontSize -= .5
+      this.font.fontSize -= 0.5
     },
     htmlClass(addClassName, removeClassName) {
-      const el = document.querySelector("html")
-      if (addClassName === "resetFont") {
+      const el = document.querySelector('html')
+      if (addClassName === 'resetFont') {
         el.classList.remove(...removeClassName) //remove multiple classes of array
       } else {
         el.classList.add(addClassName)
@@ -207,15 +320,37 @@ export default {
       }
     },
     reset() {
-      const el = document.querySelector("html")
-      this.font.fontSizePx = 16
-      el.style.fontSize = this.font.fontSizePx + "px"
+      const el = document.querySelector('html')
+      el.style.fontSize = this.font.defaultSize + 'px'
     },
     open() {
-      window.open("https://google.com", "_blank")
+      window.open('https://google.com', '_blank')
+    },
+    htmlFont() {
+      const s = document.querySelector('html')
+      if (s.style.fontSize != '') {
+        // return document.querySelector('html').style.fontSize
+        return s.style.fontSize
+      } else {
+        return window.getComputedStyle(s, null).getPropertyValue('font-size')
+      }
     }
   },
   computed: {
+    htmlFontSize() {
+      const s = document.querySelector('html')
+      return window.getComputedStyle(s, null).getPropertyValue('font-size')
+      // return {
+      //   fontSize: window.getComputedStyle(s, null).getPropertyValue('font-size')
+      // }
+      // console.log(window.getComputedStyle(s, null).getPropertyValue('font-size'))
+      // if (document.querySelector('html').style.fontSize != '') {
+      //   // return document.querySelector('html').style.getPropertyValue('fontSize')
+      //   return document.querySelector('html').style.fontSize
+      // } else {
+      //   return this.font.defaultSize
+      // }
+    }
     // reset() {
     //   return {
     //     'dotted': this.panda !== 'Kung Fu',
@@ -223,15 +358,14 @@ export default {
     //   }
     // }
   },
-  created() {
-  },
+  created() {},
   mounted() {
     // this.toggleBodyClass("addClass", "mb-0");
   },
   destroyed() {
     // this.toggleBodyClass("removeClass", "mb-0");
   }
-};
+}
 </script>
 
 <style lang="scss">
