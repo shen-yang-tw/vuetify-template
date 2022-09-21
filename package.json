@@ -22,7 +22,7 @@
     "tailwindcss": "^1.1.4",
     "uikit": "^3.2.1",
     "vue": "^2.6.10",
-    "vuetify": "^2.1.0",
+    "vuetify": "^2.6.10",
     "vuikit": "^0.8.10"
   },
   "devDependencies": {
